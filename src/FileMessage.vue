@@ -1,12 +1,12 @@
 <template>
-  <div class='sc-message--file' :style="messageColors">
+  <div class='sc-message--file' :style="messageColors" v-loading="data.proccessUpload ? data.proccessUpload : false">
     <div class='sc-message--file-icon'>
-      <a :href="data.file.url || '#'" target='_blank'>
+      <!-- <a :href="data.file.url || '#'" target='_blank'>
         <img src="./assets/file.svg" alt='generic file icon' height="60" />
-      </a>
+      </a> -->
     </div>
     <div class='sc-message--file-name' :style="messageColors">
-      <a :href="data.file.url ? data.file.url : '#'" target='_blank'>{{data.file.name || ''}}</a>
+       <a v-on:click="data.file.onclick" target="_blank"><img :src="data.file.src" class="sc-image"/></a>
     </div>
     <div class="sc-message--file-text" :style="messageColors">{{data.text}}<p v-if="data.meta" class='sc-message--meta' :style="messageColors">{{data.meta}}</p></div>
   </div>
@@ -36,7 +36,10 @@ export default {
   /* white-space: pre-wrap; */
   -webkit-font-smoothing: subpixel-antialiased
 }
-
+.sc-image {
+  max-width: 100%;
+  min-width: 100%;
+}
 .sc-message--content.sent .sc-message--file {
   word-wrap: break-word;
 }
