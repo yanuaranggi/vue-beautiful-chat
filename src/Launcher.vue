@@ -20,6 +20,7 @@
       :placeholder="placeholder"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
+      :loadingMessage="loadingMessage"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
     />
@@ -81,6 +82,10 @@ export default {
     showTypingIndicator: {
       type: String,
       default: () => ''
+    },
+    loadingMessage: {
+      type: Boolean,
+      required: true
     },
     colors: {
       type: Object,

@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
+  <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}" v-loading.sync="loadingMessage">
     <Header
       :title="title"
       :imageUrl="titleImageUrl"
@@ -98,6 +98,10 @@ export default {
       required: true
     },
     messageStyling: {
+      type: Boolean,
+      required: true
+    },
+    loadingMessage: {
       type: Boolean,
       required: true
     }
