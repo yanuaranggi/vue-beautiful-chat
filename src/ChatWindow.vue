@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}" v-loading.sync="loadingMessage">
+  <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}" v-loading.sync="loadingWindow">
     <Header
       :title="title"
       :imageUrl="titleImageUrl"
@@ -21,13 +21,14 @@
       :messageStyling="messageStyling"
     />
     <UserInput
-      v-if="!showUserList"
+      v-if="showInput && !showBtnReach"
       :showEmoji="showEmoji"
       :onSubmit="onUserInputSubmit"
       :suggestions="getSuggestions()"
       :showFile="showFile"
       :placeholder="placeholder"
       :colors="colors" />
+    <el-button @click="onClickButtonReach" type="primary" v-if="showBtnReach">Reach consumen</el-button>
   </div>
 </template>
 
@@ -48,6 +49,19 @@ export default {
     showEmoji: {
       type: Boolean,
       default: false
+    },
+    showInput: {
+      type: Boolean,
+      default: true
+    },
+    showButtonReach: {
+      type: Boolean,
+      default: false,
+      required: true
+    },
+    onClickButtonReach: {
+      type: Function,
+      required: false
     },
     showFile: {
       type: Boolean,
@@ -108,7 +122,9 @@ export default {
   },
   data() {
     return {
-      showUserList: false
+      showUserList: false,
+      loadingWindow: false,
+      showBtnReach: false
     }
   },
   computed: {
@@ -124,6 +140,18 @@ export default {
     },
     getSuggestions(){
       return this.messages.length > 0 ? this.messages[this.messages.length - 1].suggestions : []
+    }
+  },
+  watch: {
+    loadingMessage: function(){
+      setTimeout(() => {
+        this.loadingWindow = this.loadingMessage
+      }, 100)
+    },
+    showButtonReach: function(){
+      setTimeout(() => {
+        this.showBtnReach = this.showButtonReach
+      }, 100)
     }
   }
 }

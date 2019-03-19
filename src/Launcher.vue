@@ -20,8 +20,11 @@
       :placeholder="placeholder"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
+      :showInput="showInput"
       :loadingMessage="loadingMessage"
       :alwaysScrollToBottom="alwaysScrollToBottom"
+      :showButtonReach="showButtonReach"
+      :onClickButtonReach="onClickButtonReach"
       :messageStyling="messageStyling"
     />
   </div>
@@ -86,6 +89,18 @@ export default {
     loadingMessage: {
       type: Boolean,
       required: true
+    },
+    showButtonReach: {
+      type: Boolean,
+      required: true
+    },
+    onClickButtonReach: {
+      type: Function,
+      required: false
+    },
+    showInput: {
+      type: Boolean,
+      default: true
     },
     colors: {
       type: Object,
