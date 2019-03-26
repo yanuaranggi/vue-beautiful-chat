@@ -28,7 +28,7 @@
       :showFile="showFile"
       :placeholder="placeholder"
       :colors="colors" />
-    <el-button @click="onClickButtonReach" type="primary" v-if="showBtnReach">Reach consumen</el-button>
+    <el-button @click="onClickButtonReach" type="primary" v-if="showBtnReach">Reach out</el-button>
   </div>
 </template>
 
