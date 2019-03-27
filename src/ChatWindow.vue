@@ -28,7 +28,10 @@
       :showFile="showFile"
       :placeholder="placeholder"
       :colors="colors" />
-    <el-button @click="onClickButtonReach" type="primary" v-if="showBtnReach">Reach out</el-button>
+    <el-button-group>
+      <el-button @click="onClickButtonReach" style="border-radius: 0 0 0 4px; width: 65%;" type="primary" v-if="showBtnReach">Reach out</el-button>
+      <el-button @click="onClickButtonClose" style="border-radius: 0 0 4px 0; width: 35%;" type="danger" :loading="loadingButtonClose" v-if="showButtonClose">Close</el-button>
+    </el-button-group>
   </div>
 </template>
 
@@ -59,7 +62,21 @@ export default {
       default: false,
       required: true
     },
+    showButtonClose: {
+      type: Boolean,
+      default: false,
+      required: true
+    },
+    loadingButtonClose: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
     onClickButtonReach: {
+      type: Function,
+      required: false
+    },
+    onClickButtonClose: {
       type: Function,
       required: false
     },

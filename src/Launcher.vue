@@ -24,7 +24,10 @@
       :loadingMessage="loadingMessage"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :showButtonReach="showButtonReach"
+      :showButtonClose="showButtonClose"
       :onClickButtonReach="onClickButtonReach"
+      :onClickButtonClose="onClickButtonClose"
+      :loadingButtonClose="loadingButtonClose"
       :messageStyling="messageStyling"
     />
   </div>
@@ -96,6 +99,20 @@ export default {
     },
     onClickButtonReach: {
       type: Function,
+      required: false
+    },
+    onClickButtonClose: {
+      type: Function,
+      required: false
+    },
+    showButtonClose: {
+      type: Boolean,
+      default: false,
+      required: true
+    },
+    loadingButtonClose: {
+      type: Boolean,
+      default: false,
       required: false
     },
     showInput: {
