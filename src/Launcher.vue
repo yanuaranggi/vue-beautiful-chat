@@ -29,6 +29,7 @@
       :onClickButtonClose="onClickButtonClose"
       :loadingButtonClose="loadingButtonClose"
       :messageStyling="messageStyling"
+      :onMessageButton="onMessageButton"
     />
   </div>
 </template>
@@ -37,6 +38,11 @@ import ChatWindow from './ChatWindow.vue'
 
 export default {
   props: {
+    onMessageButton: {
+      type: Function,
+      required: false,
+      default: ()=>{}
+    },
     showEmoji: {
       type: Boolean,
       default: false

@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-message--text" :style="messageColors">
+  <div class="sc-message--text" :style="messageColors" v-loading="data.proccessUpload ? data.proccessUpload : false">
     <p v-html="messageText"></p>
     <p v-if="data.meta" class='sc-message--meta' :style="{color: messageColors.color}">{{data.meta}}</p>
   </div>

@@ -6,6 +6,7 @@
       :onClose="onClose"
       :colors="colors"
       @userList="handleUserListToggle"
+      :onMessageButton="onMessageButton"
     />
     <UserList 
       v-if="showUserList"
@@ -103,6 +104,11 @@ export default {
     onClose: {
       type: Function,
       required: true
+    },
+    onMessageButton: {
+      type: Function,
+      required: false,
+      default: () => {}
     },
     messageList: {
       type: Array,
