@@ -5,9 +5,16 @@
         received: message.author !== 'me' && message.type !== 'system',
         system: message.type === 'system'
       }">
-      <div v-if="message.type !== 'system'" :title="authorName" class="sc-message--avatar" :style="{
-        backgroundImage: `url(${chatImageUrl})`
-      }" v-tooltip="message.author"></div>
+      <div v-if="message.type !== 'system' && authorName" :title="authorName" class="sc-message--avatar align-vertical-middle card-shadow--small" v-tooltip="message.author" :style="'background-color:hsl(' + chatImageUrl +'); display: table'">
+        <span style="text-align: center; display: table-cell; vertical-align: middle; font-weight: bold;">
+          {{ authorName.charAt(0) }}
+        </span>
+      </div>
+      <div v-if="message.type !== 'system' && !authorName" :title="authorName" class="sc-message--avatar align-vertical-middle card-shadow--small" v-tooltip="message.author">
+        <span style="text-align: center; display: table-cell; vertical-align: middle;">
+          
+        </span>
+      </div>
       <TextMessage v-if="message.type === 'text'" :data="message.data" :messageColors="determineMessageColors()" :messageStyling="messageStyling" />
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
       <FileMessage v-else-if="message.type === 'file'" :data="message.data" :messageColors="determineMessageColors()" />
@@ -107,8 +114,8 @@ export default {
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center;
-  min-width: 30px;
-  min-height: 30px;
+  min-width: 40px;
+  min-height: 40px;
   border-radius: 50%;
   align-self: center;
   margin-right: 15px;

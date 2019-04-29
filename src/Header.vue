@@ -3,6 +3,9 @@
     <img class="sc-header--img" :src="imageUrl" alt="" v-if="imageUrl" />
     <div class="sc-header--title" @click="toggleUserList"> {{title}} </div>
     <div class="sc-header--close-button">
+      <el-button type="primary" v-if="showGroupButton" @click="onGroupButton" icon="mdi mdi-account-multiple-plus" circle></el-button>
+    </div>
+    <div class="sc-header--close-button">
       <el-button type="warning" @click="onMessageButton" icon="mdi mdi-email" circle></el-button>
     </div>
     <div class="sc-header--close-button" @click="onClose">
@@ -26,6 +29,18 @@ export default {
       required: true
     },
     onMessageButton:{
+      type: Function,
+      required: true,
+      default: () => {
+
+      }
+    },
+    showGroupButton:{
+      type: Boolean,
+      required: true,
+      default: false
+    },
+    onGroupButton:{
       type: Function,
       required: true,
       default: () => {

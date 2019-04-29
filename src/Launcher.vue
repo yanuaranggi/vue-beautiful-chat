@@ -30,6 +30,8 @@
       :loadingButtonClose="loadingButtonClose"
       :messageStyling="messageStyling"
       :onMessageButton="onMessageButton"
+      :onGroupButton="onGroupButton"
+      :showGroupButton="showGroupButton"
     />
   </div>
 </template>
@@ -124,6 +126,16 @@ export default {
     showInput: {
       type: Boolean,
       default: true
+    },
+    showGroupButton:{
+      type: Boolean,
+      required: true,
+      default: false
+    },
+    onGroupButton: {
+      type: Function,
+      required: false,
+      default: () => {}
     },
     colors: {
       type: Object,

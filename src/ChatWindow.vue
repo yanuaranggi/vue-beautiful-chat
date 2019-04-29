@@ -7,6 +7,8 @@
       :colors="colors"
       @userList="handleUserListToggle"
       :onMessageButton="onMessageButton"
+      :onGroupButton="onGroupButton"
+      :showGroupButton="showGroupButton"
     />
     <UserList 
       v-if="showUserList"
@@ -106,6 +108,16 @@ export default {
       required: true
     },
     onMessageButton: {
+      type: Function,
+      required: false,
+      default: () => {}
+    },
+    showGroupButton:{
+      type: Boolean,
+      required: true,
+      default: false
+    },
+    onGroupButton: {
       type: Function,
       required: false,
       default: () => {}

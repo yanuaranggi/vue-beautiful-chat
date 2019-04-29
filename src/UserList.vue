@@ -3,7 +3,14 @@
     <table class="" style="padding-top: 5px">
       <tbody>
         <tr v-for="user in participants" :key="user.id">
-            <td style="text-align: center;"><img :src="user.imageUrl" class="img-msg"/></td>
+            <td style="text-align: center;">
+              <!-- <img :src="user.imageUrl" class="img-msg"/> -->
+              <div class="sc-message--avatar align-vertical-middle card-shadow--small" :style="'background-color:hsl(' + user.imageUrl +'); display: table'">
+                <span style="text-align: center; display: table-cell; vertical-align: middle; font-weight: bold;">
+                  {{ user.name.charAt(0) }}
+                </span>
+              </div>
+            </td>
             <td>{{user.name}}</td>
         </tr>
       </tbody>
