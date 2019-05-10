@@ -130,11 +130,12 @@ export default {
       }
     },
     _handleEmojiPicked (emoji) {
-      this.onSubmit({
-        author: 'me',
-        type: 'emoji',
-        data: { emoji }
-      })
+      this.$refs.userInput.textContent += " " + emoji + " "
+      // this.onSubmit({
+      //   author: 'me',
+      //   type: 'emoji',
+      //   data: { emoji }
+      // })
     },
     _handleFileSubmit (file) {
       this.file = file
