@@ -32,6 +32,7 @@
       :onMessageButton="onMessageButton"
       :onGroupButton="onGroupButton"
       :showGroupButton="showGroupButton"
+      :ticketDetail="ticketDetail"
     />
   </div>
 </template>
@@ -40,6 +41,10 @@ import ChatWindow from './ChatWindow.vue'
 
 export default {
   props: {
+    ticketDetail:{
+      type: Object,
+      required: false
+    },
     onMessageButton: {
       type: Function,
       required: false,

@@ -13,6 +13,7 @@
     <UserList 
       v-if="showUserList"
       :participants="participants"
+      :detail="ticketDetail"
     />
     <MessageList
       v-if="!showUserList"
@@ -52,6 +53,10 @@ export default {
     UserList
   },
   props: {
+    ticketDetail: {
+      type: Object,
+      required: false,
+    },
     showEmoji: {
       type: Boolean,
       default: false
