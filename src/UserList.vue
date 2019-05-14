@@ -1,5 +1,5 @@
 <template>
-  <div class="user-list">
+  <div class="user-list" style="background-color: #ffffff">
     <el-collapse style="margin: 4px" value="1">
       <el-collapse-item title="Participants" name="1">
         <table class="" style="padding-top: 5px">

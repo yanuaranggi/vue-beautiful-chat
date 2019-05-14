@@ -27,11 +27,26 @@ export default {
   },
   computed: {
     messageText() {
+      const defaultTokens = {
+        bold: { delimiter: '*', tag: 'strong' },
+        italic: { delimiter: '_', tag: 'em' },
+        underline: { delimiter: '%', tag: 'u' },
+        strike: { delimiter: '~', tag: 'del' },
+        code: { delimiter: '`', tag: 'code' },
+        sup: { delimiter: '^', tag: 'sup' },
+        sub: { delimiter: '¡', tag: 'sub' }
+      }
       const escaped = escapeGoat.escape(this.data.text)
-
-      return Autolinker.link(this.messageStyling ? fmt(escaped) : escaped, {
+      return Autolinker.link(this.messageStyling ? fmt(escaped, defaultTokens) : escaped, {
+        stripTrailingSlash: false,
         className: 'chatLink',
-        truncate: { length: 50, location: 'smart' }
+        truncate: { length: 50, location: 'smart' },
+        replaceFn : function( match ) {
+          var tag = match.buildTag();         // returns an `Autolinker.HtmlTag` instance for an <a> tag
+          tag.setInnerHtml(match.getAnchorHref());  // sets the inner html for the anchor tag
+
+          return tag;
+        }
       })
     }
   }
