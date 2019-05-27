@@ -33,6 +33,7 @@
       :onGroupButton="onGroupButton"
       :showGroupButton="showGroupButton"
       :ticketDetail="ticketDetail"
+      :quickReplyList="quickReplyList"
     />
   </div>
 </template>
@@ -41,6 +42,11 @@ import ChatWindow from './ChatWindow.vue'
 
 export default {
   props: {
+    quickReplyList: {
+      type: Array,
+      required: false,
+      default: () => []
+    },
     ticketDetail:{
       type: Object,
       required: false

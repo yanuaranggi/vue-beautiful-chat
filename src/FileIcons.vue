@@ -1,6 +1,7 @@
 <template>
   <label htmlFor='file-input' >
     <button
+      style="margin-top: 2px"
       class="sc-user-input--file-icon-wrapper"
       type='button'
     >

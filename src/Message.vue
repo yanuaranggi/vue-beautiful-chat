@@ -87,8 +87,8 @@ export default {
 </script>
 <style lang="scss">
 .sc-message {
-  width: 300px;
-  margin: auto;
+  // width: 400px;
+  margin: auto 20px auto 20px;
   padding-bottom: 10px;
   display: flex;
 }
@@ -103,7 +103,8 @@ export default {
 }
 
 .sc-message--content.system {
-  justify-content: center;
+  justify-content: left;
+  margin: auto 10px auto 10px !important;
 }
 
 .sc-message--content.sent .sc-message--avatar {

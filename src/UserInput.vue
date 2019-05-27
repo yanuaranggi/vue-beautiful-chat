@@ -22,6 +22,9 @@
       </div>
       <div class="sc-user-input--buttons">
         <div class="sc-user-input--button"></div>
+        <div class="sc-user-input--button">
+          <QuickReply :onQuickReplyPicked="_quickReplyPicked" :quickReplyList="quickReplyList" />
+        </div>
         <div v-if="showEmoji" class="sc-user-input--button">
           <EmojiIcon :onEmojiPicked="_handleEmojiPicked" :color="colors.userInput.text" />
         </div>
@@ -42,13 +45,15 @@ import EmojiIcon from './EmojiIcon.vue'
 import FileIcons from './FileIcons.vue'
 import SendIcon from './SendIcon.vue'
 import Suggestions from './Suggestions.vue'
+import QuickReply from './QuickReply.vue'
 
 export default {
   components: {
     EmojiIcon,
     FileIcons,
     SendIcon,
-    Suggestions
+    Suggestions,
+    QuickReply
   },
   props: {
     showEmoji: {
@@ -74,6 +79,11 @@ export default {
     colors: {
       type: Object,
       required: true
+    },
+    quickReplyList: {
+      type: Array,
+      required: false,
+      default: () => []
     }
   },
   data () {
@@ -136,6 +146,10 @@ export default {
       //   type: 'emoji',
       //   data: { emoji }
       // })
+    },
+    _quickReplyPicked(text){
+      this.$refs.userInput.textContent += text + " "
+      this.$refs.userInput.focus()
     },
     _handleFileSubmit (file) {
       this.file = file

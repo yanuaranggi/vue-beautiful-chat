@@ -31,6 +31,7 @@
       :suggestions="getSuggestions()"
       :showFile="showFile"
       :placeholder="placeholder"
+      :quickReplyList="quickReplyList"
       :colors="colors" />
     <el-button-group>
       <el-button @click="onClickButtonReach" style="border-radius: 0 0 0 4px; width: 65%;" type="primary" v-if="showBtnReach">Reach out</el-button>
@@ -53,6 +54,11 @@ export default {
     UserList
   },
   props: {
+    quickReplyList: {
+      type: Array,
+      required: false,
+      default: () => []
+    },
     ticketDetail: {
       type: Object,
       required: false,
@@ -198,7 +204,7 @@ export default {
 </script>
 <style scoped>
 .sc-chat-window {
-  width: 370px;
+  width: 470px;
   height: calc(100% - 120px);
   max-height: 590px;
   position: fixed;
