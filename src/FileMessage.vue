@@ -6,9 +6,16 @@
       </a> -->
     </div>
     <div class='sc-message--file-name' :style="messageColors">
-       <a v-on:click="data.file.onclick" target="_blank"><img :src="data.file.src" class="sc-image"/></a>
+       <a v-if="imageFile.indexOf(checkFileType(data.file.src)) !== -1" v-on:click="data.file.onclick" target="_blank"><img :src="data.file.src" class="sc-image"/></a>
+       <a v-else v-on:click="data.file.onclick" target="_blank">
+         <img src="./assets/file.svg" height="60" :alt="data.file.src" />
+       </a>
     </div>
-    <div class="sc-message--file-text" :style="messageColors">{{data.text}}<p v-if="data.meta" class='sc-message--meta' :style="messageColors">{{data.meta}}</p></div>
+    <div class="sc-message--file-text" :style="messageColors">
+      <span v-if="imageFile.indexOf(checkFileType(data.file.src)) !== -1">{{data.text}}</span>
+      <span v-else style="color: gray; font-weight: 700">{{data.text}}</span>
+      <p v-if="data.meta" class='sc-message--meta' :style="messageColors">{{data.meta}}</p>
+    </div>
   </div>
 </template>
 
@@ -22,6 +29,24 @@ export default {
     messageColors: {
       type: Object,
       required: true
+    }
+  },
+  data() {
+    return {
+      imageFile: ['png', 'jpg', 'gif', 'jpeg']
+    }
+  },
+  methods:{
+    checkFileType(data){
+      if(data.substring(0, 4) == "http"){
+        let reverseStr = this.reverse(data)
+        return this.reverse(reverseStr.substring(0, reverseStr.indexOf(".")))
+      } else {
+        return data.substring("data:image/".length, data.indexOf(";base64"))
+      }
+    },
+    reverse(string){
+      return string.split("").reverse().join("")
     }
   }
 }
