@@ -7,6 +7,10 @@
     </div>
     <div class='sc-message--file-name' :style="messageColors">
        <a v-if="imageFile.indexOf(checkFileType(data.file.src)) !== -1" v-on:click="data.file.onclick" target="_blank"><img :src="data.file.src" class="sc-image"/></a>
+       <a class="linkwrap" v-else-if="videoFile.indexOf(checkFileType(data.file.src)) !== -1" v-on:click="data.file.onclick" target="_blank">
+        <div class="blocker"></div> 
+        <iframe :src="data.file.src" v-on:click="data.file.onclick"/>
+       </a>
        <a v-else v-on:click="data.file.onclick" target="_blank">
          <img src="./assets/file.svg" height="60" :alt="data.file.src" />
        </a>
@@ -33,7 +37,8 @@ export default {
   },
   data() {
     return {
-      imageFile: ['png', 'jpg', 'gif', 'jpeg']
+      imageFile: ['png', 'jpg', 'gif', 'jpeg'],
+      videoFile: ['mp4', 'mkv', 'mov']
     }
   },
   methods:{
@@ -53,6 +58,10 @@ export default {
 </script>
 
 <style scoped>
+.linkwrap { position:relative; display:inline-block; }
+.blocker { position:absolute; height:100%; width:100%; z-index:1; background:transparent;  }
+.linkwrap iframe { z-index: 2; }
+
 .sc-message--file {
   border-radius: 6px;
   font-weight: 300;
