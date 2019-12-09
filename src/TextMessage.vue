@@ -8,6 +8,8 @@
 <script>
 import escapeGoat from 'escape-goat'
 import Autolinker from 'autolinker'
+import * as EmailValidator from 'email-validator';
+
 const fmt = require('msgdown')
 
 export default {
@@ -36,15 +38,24 @@ export default {
         sup: { delimiter: '^', tag: 'sup' },
         sub: { delimiter: '¡', tag: 'sub' }
       }
+      let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g
       const escaped = escapeGoat.escape(this.data.text)
-      return Autolinker.link(this.messageStyling ? fmt(escaped, defaultTokens) : escaped, {
+      let escapedArr = escaped.split(/\s/g)
+      let joinStr = escapedArr.map(v => {
+        if(EmailValidator.validate(v)){
+          console.log("v", v)
+          return v
+        } else {
+          return fmt(v, defaultTokens)
+        }
+      })
+      return Autolinker.link(this.messageStyling ? joinStr.join(" ") : escaped, {
         stripTrailingSlash: false,
         className: 'chatLink',
         truncate: { length: 50, location: 'smart' },
         replaceFn : function( match ) {
           var tag = match.buildTag();         // returns an `Autolinker.HtmlTag` instance for an <a> tag
-          tag.setInnerHtml(match.getAnchorHref());  // sets the inner html for the anchor tag
-
+          tag.setInnerHtml(match.matchedText);  // sets the inner html for the anchor tag
           return tag;
         }
       })
