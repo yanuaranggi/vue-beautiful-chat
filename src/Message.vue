@@ -15,11 +15,12 @@
           
         </span>
       </div>
-      <TextMessage v-if="message.type === 'text'" :data="message.data" :messageColors="determineMessageColors()" :messageStyling="messageStyling" />
+      <TextMessage v-if="message.type === 'text' || message.type === 'contacts'" :data="message.data" :messageColors="determineMessageColors()" :messageStyling="messageStyling" />
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
       <FileMessage v-else-if="message.type === 'file'" :data="message.data" :messageColors="determineMessageColors()" />
       <TypingMessage v-else-if="message.type === 'typing'" :messageColors="determineMessageColors()" />
       <SystemMessage v-else-if="message.type === 'system'" :data="message.data" :messageColors="determineMessageColors()" />
+      <LocationMessage v-else-if="message.type === 'location'" :data="message.data" :messageColors="determineMessageColors()" :messageStyling="messageStyling" />
     </div>
   </div>
 </template>
@@ -30,6 +31,7 @@ import FileMessage from './FileMessage.vue'
 import EmojiMessage from './EmojiMessage.vue'
 import TypingMessage from './TypingMessage.vue'
 import SystemMessage from './SystemMessage.vue'
+import LocationMessage from './LocationMessage.vue'
 import chatIcon from './assets/chat-icon.svg'
 
 export default {
@@ -43,7 +45,8 @@ export default {
     FileMessage,
     EmojiMessage,
     TypingMessage,
-    SystemMessage
+    SystemMessage,
+    LocationMessage
   },
   props: {
     message: {

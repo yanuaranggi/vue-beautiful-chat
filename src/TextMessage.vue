@@ -29,36 +29,37 @@ export default {
   },
   computed: {
     messageText() {
-      const defaultTokens = {
-        bold: { delimiter: '*', tag: 'strong' },
-        italic: { delimiter: '_', tag: 'em' },
-        underline: { delimiter: '%', tag: 'u' },
-        strike: { delimiter: '~', tag: 'del' },
-        code: { delimiter: '`', tag: 'code' },
-        sup: { delimiter: '^', tag: 'sup' },
-        sub: { delimiter: '¡', tag: 'sub' }
-      }
-      let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g
-      const escaped = escapeGoat.escape(this.data.text)
-      let escapedArr = escaped.split(/\s/g)
-      let joinStr = escapedArr.map(v => {
-        if(EmailValidator.validate(v)){
-          console.log("v", v)
-          return v
-        } else {
-          return fmt(v, defaultTokens)
-        }
-      })
-      return Autolinker.link(this.messageStyling ? joinStr.join(" ") : escaped, {
-        stripTrailingSlash: false,
-        className: 'chatLink',
-        truncate: { length: 50, location: 'smart' },
-        replaceFn : function( match ) {
-          var tag = match.buildTag();         // returns an `Autolinker.HtmlTag` instance for an <a> tag
-          tag.setInnerHtml(match.matchedText);  // sets the inner html for the anchor tag
-          return tag;
-        }
-      })
+      // const defaultTokens = {
+      //   bold: { delimiter: '*', tag: 'strong' },
+      //   italic: { delimiter: '_', tag: 'em' },
+      //   underline: { delimiter: '%', tag: 'u' },
+      //   strike: { delimiter: '~', tag: 'del' },
+      //   code: { delimiter: '`', tag: 'code' },
+      //   sup: { delimiter: '^', tag: 'sup' },
+      //   sub: { delimiter: '¡', tag: 'sub' }
+      // }
+      // let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g
+      // const escaped = escapeGoat.escape(this.data.text)
+      // let escapedArr = escaped.split(/\s/g)
+      // let joinStr = escapedArr.map(v => {
+      //   if(EmailValidator.validate(v)){
+      //     console.log("v", v)
+      //     return v
+      //   } else {
+      //     return fmt(v, defaultTokens)
+      //   }
+      // })
+      // return Autolinker.link(this.data.text, {
+      //   stripTrailingSlash: false,
+      //   className: 'chatLink',
+      //   truncate: { length: 50, location: 'smart' },
+      //   replaceFn : function( match ) {
+      //     var tag = match.buildTag();         // returns an `Autolinker.HtmlTag` instance for an <a> tag
+      //     tag.setInnerHtml(match.matchedText);  // sets the inner html for the anchor tag
+      //     return tag;
+      //   }
+      // })
+      return this.data.text
     }
   }
 }
