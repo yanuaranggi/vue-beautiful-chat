@@ -11,7 +11,7 @@
         :url="url"
         :attribution="attribution"
       />
-      <l-marker :lat-lng="center"/>
+      <l-marker :lat-lng="loc"/>
     </l-map>
     <p v-if="data.meta" class='sc-message--meta' :style="{color: messageColors.color}">{{data.meta}}</p>
   </div>
@@ -60,6 +60,7 @@ export default {
         lat: 0,
         lng: 0
       },
+      loc: latLng(),
       currentZoom: 18,
       center: latLng(),
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -90,6 +91,7 @@ export default {
       lng: parseFloat(lng)
     }
     this.center = latLng(lat, lng)
+    this.loc = latLng(lat, lng)
     console.log(this.location)
   }
 }
